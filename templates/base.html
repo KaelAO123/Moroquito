@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Panaderia{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="about">Acerca De</a></li>
+            <li><a href=""></a>Contacto</li>
+        </ul>
+    </nav>
+
+    <div class="contenido">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; Esto es solo mio</p>
+    </footer>
+</body>
+</html>
