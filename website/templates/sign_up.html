@@ -1,0 +1,56 @@
+{% extends "baseLogin.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+{% block titulo %}Registrate{% endblock %}
+
+<form method="POST">
+    <div class="mb-3">
+        <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Correo Electrónico"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <input
+            type="text"
+            class="form-control"
+            id="first_name"
+            name="first_name"
+            placeholder="Nombre"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <input
+            type="password"
+            class="form-control"
+            id="password1"
+            name="password1"
+            placeholder="Contraseña"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <input
+            type="password"
+            class="form-control"
+            id="password2"
+            name="password2"
+            placeholder="Confirmar Contraseña"
+            required
+        />
+    </div>
+    <button type="submit" class="btn btn-warning w-100">Registrarte</button>
+    <div class="text-center mt-3">
+                   <p> ¿Ya tienes cuenta? <a href="/login" class="text-decoration-none">Inicia sesión aquí</a></p>
+
+    </div>
+</form>
+{% endblock %}
+
+
+
