@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-around">
+    <h2>Lista de Pedidos</h2>
+</div>
+<!--Lista en una tarjeta donde cada usuario tenga sus datos y dos botones para editar y eliminar utilizando grid-->
+<div class="row">
+    {% for pedido,product in pedidos %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <!-- Imagen del producto -->
+            <img src="{{ url_for('static', filename=product.image) }}" style="height: 200px; object-fit:cover"
+                class="card-img-top" alt="{{ product.name }}">
+
+            <!-- Cuerpo de la tarjeta -->
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-muted">Cantidad: {{ pedido.cantidadPedida }}</p>
+                <p class="card-text text-muted">Fecha de Solicitud: {{ pedido.fecha_pedido }}</p>
+                <p class="card-text text-muted">Fecha de Entrega: {{ pedido.fecha_entrega }}</p>
+                <p class="card-text text">Direccion: {{pedido.direction}}</p>
+                <p class="card-text text">Mensaje: {{pedido.message}}</p>
+                <p class="card-text text">Estado: {{pedido.estado}}</p>
+            </div>
+            <div>
+
+                <a href="{{ url_for('pedido.update_pedido', id=pedido.idPedido) }}" class="btn btn-info">Editar</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Eliminar
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Pedido {{product.name}}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <a href="{{ url_for('pedido.delete_pedido', id=pedido.idPedido) }}"
+                                    class="btn btn-danger">Confirmar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if current_user.has_role('admin') %}
+
+
+                {% endif %}
+            </div>
+            <!-- Pie de la tarjeta -->
+
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

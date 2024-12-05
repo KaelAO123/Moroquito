@@ -37,7 +37,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ url_for('user.profile',id=current_user.email) }}">Perfil</a></li>
-                            <li><a class="dropdown-item" href="/products/pastel">Pedidos</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('pedido.list_pedidos')}}">Pedidos</a></li>
                             {% if current_user.has_role("admin") %}
                             <li><a class="dropdown-item" href="{{url_for('user.list_users')}}">Lista de Usuarios</a></li>
                             {% endif %}

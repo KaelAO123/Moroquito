@@ -1,6 +1,5 @@
 from flask import Blueprint, request, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required, current_user
-from werkzeug.security import check_password_hash
+from flask_login import login_required, current_user
 import os
 from werkzeug.utils import secure_filename
 from views import producto_view
@@ -23,7 +22,7 @@ def list_products():
 def create_product():
     if request.method == "POST":
         name = request.form["name"]
-        price = request.form["price"]
+        price = float(request.form["price"])
         category = request.form["category"]
         cant_disp = request.form["cant_disp"]
         description = request.form["description"]

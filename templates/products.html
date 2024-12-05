@@ -58,10 +58,10 @@
                 <div>
                     <!-- Botón de Compra -->
                     <!-- Botón de Añadir al carrito -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pedidos_modal"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pe{{product.idProducto}}"
                         data-bs-whatever="">Añadir a Pedidos</button>
 
-                    <div class="modal fade" id="pedidos_modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="pe{{product.idProducto}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -71,21 +71,37 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form method="post" action="{{url_for('pedido.create_pedido')}}">
                                         <div class="mb-3">
-                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <label for="direction" class="col-form-label">Direccion:</label>
+                                            <input type="text" class="form-control" name="direction" required value="{{current_user.direction}}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="message-text" class="col-form-label">Message:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
+                                            <label for="message" class="col-form-label">Mensaje:</label>
+                                            <textarea class="form-control" name="message"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cantidadPedida" class="col-form-label">Cantidad:</label>
+                                            <input type="number" class="form-control" name="cantidadPedida" required value="1">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="fecha_entrega" class="col-form-label">Fecha de entrega:</label>
+                                            <input type="datetime-local" class="form-control" name="fecha_entrega" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="col-form-label">Email:</label>
+                                            <input type="email" class="form-control" name="email" readonly value="{{current_user.email}}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="idProduct" class="col-form-label">Id del Producto:</label>
+                                            <input type="numeric" class="form-control" name="idProduct" readonly value="{{product.idProducto}}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Pedir</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary">Pedir</button>
                                 </div>
                             </div>
                         </div>

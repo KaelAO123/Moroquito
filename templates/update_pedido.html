@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center mb-4">Actualizar Pedido</h1>
+<form  method="POST" action="/pedidos/{{pedido.idPedido}}/update" class=" p-4">
+    <!-- Campo de nombre del producto -->
+    <div class="mb-3">
+        <label for="direction" class="form-label">Direccion</label>
+        <input type="text" class="form-control" id="direction" name="direction" value="{{pedido.direction}}" required>
+    </div>
+
+    <!-- Campo de descripción -->
+    <div class="mb-3">
+        <label for="message" class="form-label">Mensaje</label>
+        <textarea class="form-control" id="message" name="message" required>{{pedido.message}}</textarea>
+    </div>
+
+    <!-- Campo de precio -->
+    <div class="mb-3">
+        <label for="cantidadPedida" class="form-label">Cantidad Pedida</label>
+        <input type="number" class="form-control" id="cantidadPedida" name="cantidadPedida" value="{{pedido.cantidadPedida}}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="fecha_entrega" class="form-label">Fecha de Entrega</label>
+        <input type="datetime-local" class="form-control" id="fecha_entrega" name="fecha_entrega" value="{{pedido.fecha_entrega}}" required>
+    </div>
+    <!-- Campo de categoría -->
+
+    <button type="submit" class="btn btn-primary">Actualizar Pedido</button>
+</form>
+{% endblock %}

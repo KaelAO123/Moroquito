@@ -8,7 +8,7 @@ from controllers import usuario_controller
 from controllers import producto_controller
 
 # Importamos el controlador de panaderos
-from controllers import panadero_controller
+from controllers import pedido_controller
 
 # Importamos la base de datos
 from database import db
@@ -40,6 +40,7 @@ db.init_app(app)
 # Registra el Blueprint de usuarios
 app.register_blueprint(usuario_controller.user_bp)
 app.register_blueprint(producto_controller.product_bp)
+app.register_blueprint(pedido_controller.pedido_bp)
 
 if __name__ == "__main__":
     # Crea las tablas si no existen

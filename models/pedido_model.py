@@ -5,19 +5,25 @@ from flask_login import UserMixin
 class Pedidos(UserMixin, db.Model):
     __tablename__ = "pedidos"
     idPedido = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    fecha_pedido = db.Column(db.Date, nullable=False)
-    fecha_entrega = db.Column(db.Date, nullable=False)
-    dirreccion = db.Column(db.String, nullable=False)
-    mensaje = db.Column(db.String, nullable=False)
-    producto = db.Column(db.Integer,db.ForeignKey("productos.idProducto"),nullable=False)
-    usuario = db.Column(db.String,db.ForeignKey("Pedidos.email"),nullable=False)
+    fecha_pedido = db.Column(db.DateTime, nullable=False)
+    fecha_entrega = db.Column(db.DateTime, nullable=False)
+    direction = db.Column(db.String, nullable=False)
+    message = db.Column(db.String, nullable=False)
+    cantidadPedida = db.Column(db.Integer, nullable=False)
+    estado = db.Column(db.String(20), nullable=False)
     
-    def __init__(self, fecha_entrega, fecha_pedido, usuario, producto,dirreccion):
+    idProduct = db.Column(db.Integer,db.ForeignKey("productos.idProducto"),nullable=False)
+    email = db.Column(db.String,db.ForeignKey("usuarios.email"),nullable=False)
+
+    def __init__(self, fecha_entrega, fecha_pedido, email, idProduct,direction,message,cantidadPedida,estado="Pendiente"):
         self.fecha_entrega = fecha_entrega
         self.fecha_pedido = fecha_pedido
-        self.usuario = usuario
-        self.producto = producto
-        self.dirreccion = dirreccion
+        self.email = email
+        self.idProduct = idProduct
+        self.direction = direction
+        self.message = message
+        self.cantidadPedida = cantidadPedida
+        self.estado = estado
         
     def save(self):
         db.session.add(self)
@@ -42,3 +48,8 @@ class Pedidos(UserMixin, db.Model):
         db.session.delete(self)
         db.session.commit()
     
+    def join(tabla,email):
+        return (db.session.query(Pedidos, tabla)
+        .join(tabla, Pedidos.idProduct == tabla.idProducto)
+        .filter(Pedidos.email == email)
+        .all())
