@@ -21,19 +21,20 @@ user_bp = Blueprint("user", __name__)
 @user_bp.route("/")
 def index():
     admin = Usuarios.query.filter_by(email="admin@localHost").first()
+    
+    
+    if current_user.is_authenticated:
+        return redirect(url_for("user.profile", id=current_user.email))
     if not admin:
         # Crea un administrador por defecto
             admin = Usuarios(email="admin@localHost",
             first_name="Kae",
             last_name="Reyes",
-            password_hash="3l1z4",
+            password_hash="k",
             direction="Villa Fatima",
             celphone="73299947",
             role="admin")
             admin.save()
-    
-    if current_user.is_authenticated:
-        return redirect(url_for("user.profile", id=current_user.email))
     return redirect(url_for("user.login"))
 
 @user_bp.route("/users")
@@ -67,7 +68,7 @@ def create_user():
         # Guardamos el usuario
         user.save()
         flash("Usuario registrado exitosamente", "success")
-        return redirect(url_for("user.list_users"))
+        return redirect(url_for("user.login"))
     # Llamamos a la vista de registro
     return usuario_view.registro()
 
@@ -87,10 +88,18 @@ def update_user(id):
         # Obtenemos los datos del formulario
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
+        email = request.form["email"]
+        direction = request.form["direction"]
+        celphone = request.form["cellphone"]
+        role = request.form["role"]
         
         # Actualizamos los datos del usuario
         user.first_name = first_name
         user.last_name = last_name
+        user.email = email
+        user.direction = direction
+        user.celphone = celphone
+        user.role = role
         # Guardamos los cambios
         user.update()
         return redirect(url_for("user.list_users"))

@@ -33,12 +33,11 @@
                             Productos
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('product.list_products') }}">Lista de
+                                    Productos</a></li>
                             <li><a class="dropdown-item" href="/products/pastel">Pasteles</a></li>
                             <li><a class="dropdown-item" href="/products/masas-blancas">Masas blancas</a></li>
                             <li><a class="dropdown-item" href="/products/masas-duras">Masas duras</a></li>
-                            {% if current_user.has_role('admin') %}
-                            <li><a class="dropdown-item" href="/prodcuts">Productos</a></li>
-                            {% endif %}
                         </ul>
                     </li>
                     <li class="nav-item">

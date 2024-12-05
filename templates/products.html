@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row d-flex">
+    <h2 class="subtitle is-2">Lista de Productos</h2>
+    {% if current_user.has_role('admin') %}
+    <a href="{{ url_for('product.create_product') }}">Crear Producto</a>
+    {% endif %}
+</div>
+<!--Lista en una tarjeta donde cada usuario tenga sus datos y dos botones para editar y eliminar utilizando grid-->
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <!-- Imagen del producto -->
+            <img src="{{ url_for('static', filename=product.image) }}" class="card-img-top" alt="{{ product.name }}">
+
+            <!-- Cuerpo de la tarjeta -->
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text text-muted">Categoría: {{ product.category }}</p>
+                <p class="card-text">{{ product.description }}</p>
+            </div>
+            <div>
+                {% if current_user.has_role('admin') %}
+            <a href="{{ url_for('product.update_product', id=product.idProducto) }}" class="btn btn-info">Editar</a>
+            <a href="{{ url_for('product.delete_product', id=product.idProducto) }}" class="btn btn-danger">Eliminar</a>
+            {% endif %}
+            </div>
+            <!-- Pie de la tarjeta -->
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-primary">$ {{ product.price }}</span>
+                <small class="text-muted">Disponibles: {{ product.cant_disp }}</small>
+                <div>
+                    <!-- Botón de Compra -->
+                    <a href="/comprar/{{ product.idProducto }}" class="btn btn-success btn-sm">Comprar</a>
+                    <!-- Botón de Añadir al carrito -->
+                    <a href="/carrito/{{ product.idProducto }}" class="btn btn-outline-primary btn-sm">Añadir al
+                        carrito</a>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

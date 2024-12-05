@@ -39,7 +39,7 @@ def load_user(user_email):
 db.init_app(app)
 # Registra el Blueprint de usuarios
 app.register_blueprint(usuario_controller.user_bp)
-
+app.register_blueprint(producto_controller.product_bp)
 
 if __name__ == "__main__":
     # Crea las tablas si no existen
