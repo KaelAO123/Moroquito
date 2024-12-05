@@ -40,7 +40,7 @@ def create_product():
         return redirect(url_for("product.list_products"))
     return producto_view.create_product()
 
-@product_bp.route("/productos/<int:id>/delete")
+@product_bp.route("/products/<int:id>/delete")
 @login_required
 @role_required("admin")
 def delete_product(id):
@@ -52,7 +52,7 @@ def delete_product(id):
     return redirect(url_for("product.list_products"))
 
 
-@product_bp.route("/productos/<int:id>/update", methods=["GET", "POST"])
+@product_bp.route("/products/<int:id>/update", methods=["GET", "POST"])
 @login_required
 @role_required("admin")
 def update_product(id):
@@ -65,17 +65,22 @@ def update_product(id):
         category = request.form["category"]
         cant_disp = request.form["cant_disp"]
         description = request.form["description"]
-        image = request.form["image"]
+        image = request.files["image"]
         
         producto.name = name
         producto.price = price
         producto.category = category
         producto.cant_disp = cant_disp
         producto.description = description
-        producto.image = image
+        if image:
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('static/images', filename))
+            image_path = os.path.join("/images/"+filename)
+            print(filename)
+        producto.image = image_path
         
         flash("Producto actualizado exitosamente", "success")
         producto.save()
-        return redirect(url_for("dulce.list_dulces"))
+        return redirect(url_for("product.list_products"))
 
     return producto_view.update_product(producto)

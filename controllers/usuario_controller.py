@@ -150,5 +150,7 @@ def logout():
 @user_bp.route("/profile/<string:id>")
 @login_required
 def profile(id):
-    user = Usuarios.get_user_by_email(id)
+    user:Usuarios = Usuarios.get_user_by_email(id)
+    if user.has_role("admin"):
+        return redirect(url_for("user.list_users"))
     return usuario_view.perfil(user)

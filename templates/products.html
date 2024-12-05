@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row d-flex">
-    <h2 class="subtitle is-2">Lista de Productos</h2>
+<div class="d-flex justify-content-around">
+    <h2>Lista de Productos</h2>
     {% if current_user.has_role('admin') %}
-    <a href="{{ url_for('product.create_product') }}">Crear Producto</a>
+    <a href="{{ url_for('product.create_product') }}" class="btn btn-primary">Crear Producto</a>
     {% endif %}
 </div>
 <!--Lista en una tarjeta donde cada usuario tenga sus datos y dos botones para editar y eliminar utilizando grid-->
@@ -13,7 +13,9 @@
     <div class="col-md-4 mb-4">
         <div class="card">
             <!-- Imagen del producto -->
-            <img src="{{ url_for('static', filename=product.image) }}" class="card-img-top" alt="{{ product.name }}">
+            <img src="{{ url_for('static', filename=product.image) }}" 
+            style="height: 200px; object-fit:cover" 
+            class="card-img-top" alt="{{ product.name }}">
 
             <!-- Cuerpo de la tarjeta -->
             <div class="card-body">
@@ -24,7 +26,28 @@
             <div>
                 {% if current_user.has_role('admin') %}
             <a href="{{ url_for('product.update_product', id=product.idProducto) }}" class="btn btn-info">Editar</a>
-            <a href="{{ url_for('product.delete_product', id=product.idProducto) }}" class="btn btn-danger">Eliminar</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Eliminar
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto {{product.name}}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <a href="{{ url_for('product.delete_product', id=product.idProducto) }}" class="btn btn-danger">Confirmar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             {% endif %}
             </div>
             <!-- Pie de la tarjeta -->
