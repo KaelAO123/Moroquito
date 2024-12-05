@@ -1,8 +1,57 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Home - Mi Aplicación{% endblock %}
+{% block title %}Inicio - Moroquito{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        background-image: url('/static/images/background.png'); /* Ruta de la imagen */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Imagen fija al hacer scroll */
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+
+    .about-section {
+        background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+        padding: 50px 20px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 900px;
+        text-align: center;
+    }
+
+    .about-section h2 {
+        color: orange;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .about-section p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #f1f1f1;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-    <h1>Welcome to the Home Page</h1>
-    <p>Contenido específico de la página de inicio.</p>
+<!-- Contenido principal -->
+<div class="text-center">
+    <h1>Bienvenido a Moroquito</h1>
+    <p>Disfruta de los mejores productos de panadería y pastelería.</p>
+</div>
+
+<!-- Sección Sobre Nosotros -->
+<div class="about-section">
+    <h2>Sobre Nosotros</h2>
+    <p>
+        En Moroquito, nos apasiona la panadería y pastelería. Desde nuestros inicios, hemos trabajado con dedicación para ofrecer productos de la más alta calidad, elaborados con ingredientes frescos y un toque de amor. Creemos en la importancia de mantener las tradiciones mientras innovamos para satisfacer los gustos de nuestros clientes.
+    </p>
+    <p>
+        Nuestro equipo está comprometido a brindar una experiencia única, desde el momento en que pruebas uno de nuestros productos hasta el servicio al cliente personalizado que ofrecemos. ¡Gracias por ser parte de nuestra familia!
+    </p>
+</div>
 {% endblock %}
