@@ -1,44 +1,61 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-center mb-4">Crear Producto</h1>
-<form  method="POST" enctype="multipart/form-data">
-    <!-- Campo de nombre del producto -->
-    <div class="mb-3">
-        <label for="name" class="form-label">Nombre del Producto</label>
-        <input type="text" class="form-control" id="name" name="name" required>
-    </div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">Crear Producto</h1>
 
-    <!-- Campo de descripción -->
-    <div class="mb-3">
-        <label for="description" class="form-label">Descripción</label>
-        <textarea class="form-control" id="description" name="description" required></textarea>
-    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <form method="POST" enctype="multipart/form-data" class="shadow-sm p-4 bg-light rounded">
+                <!-- Campo de nombre del producto -->
+                <h5 class="mb-3">Información General</h5>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre del producto" required>
+                </div>
 
-    <!-- Campo de precio -->
-    <div class="mb-3">
-        <label for="price" class="form-label">Precio</label>
-        <input type="text" class="form-control" id="price" name="price" required>
-    </div>
+                <!-- Campo de descripción -->
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" 
+                              placeholder="Escriba una descripción del producto" required></textarea>
+                </div>
 
-    <!-- Campo de categoría -->
-    <div class="mb-3">
-        <label for="category" class="form-label">Categoría</label>
-        <input type="text" class="form-control" id="category" name="category" required>
-    </div>
+                <!-- Campo de precio -->
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio</label>
+                    <input type="number" step="0.01" class="form-control" id="price" name="price" 
+                           placeholder="Ejemplo: 99.99" required>
+                </div>
 
-    <!-- Campo de cantidad disponible -->
-    <div class="mb-3">
-        <label for="cant_disp" class="form-label">Cantidad Disponible</label>
-        <input type="number" class="form-control" id="cant_disp" name="cant_disp" required>
-    </div>
+                <!-- Campo de categoría -->
+                <h5 class="mt-4 mb-3">Detalles del Producto</h5>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Categoría</label>
+                    <input type="text" class="form-control" id="category" name="category" 
+                           placeholder="Ingrese la categoría del producto" required>
+                </div>
 
-    <!-- Campo de imagen -->
-    <div class="mb-3">
-        <label for="image" class="form-label">Imagen del Producto</label>
-        <input type="file" class="form-control" id="image" name="image" required>
-    </div>
+                <!-- Campo de cantidad disponible -->
+                <div class="mb-3">
+                    <label for="cant_disp" class="form-label">Cantidad Disponible</label>
+                    <input type="number" class="form-control" id="cant_disp" name="cant_disp" 
+                           placeholder="Ingrese la cantidad disponible" required>
+                </div>
 
-    <button type="submit" class="btn btn-primary">Crear Producto</button>
-</form>
+                <!-- Campo de imagen -->
+                <h5 class="mt-4 mb-3">Imagen del Producto</h5>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Seleccionar Imagen</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5">Crear Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
