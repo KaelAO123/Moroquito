@@ -9,30 +9,51 @@
     <title>{{ title }}</title>
     {% block style %}{% endblock %}
     <style>
-        /* Navbar transparente */
-        .navbar {
-            background-color: rgba(255, 255, 255, 0.7); /* Blanco semitransparente */
-            backdrop-filter: blur(5px); /* Efecto de desenfoque detrás del navbar */
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Línea sutil para separar el navbar */
+        /* Configuración para mantener el footer siempre abajo */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
         }
 
-        /* Estilo de enlaces en el navbar */
-        .navbar .nav-link {
-            color: black; /* Color del texto de los enlaces */
-            font-weight: bold;
+        .container {
+            flex: 1; /* Ocupa el espacio restante entre el header y el footer */
         }
 
-        .navbar .nav-link:hover {
-            color: orange; /* Cambia a naranja al pasar el mouse */
+        footer {
+            background-color: #333333; /* Fondo negro */
+            color: orange; /* Texto naranja */
+            padding: 20px 0;
+            text-align: center;
         }
 
-        /* Espaciado entre H1 y navbar */
-        h1 {
-            margin: 0; /* Elimina cualquier margen extra */
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        /* Fondo de página */
+        footer img {
+            width: 80px;
+        }
 
+        footer a {
+            color: orange;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -87,6 +108,29 @@
     <div class="container pb-5" style="margin-top: 20px;">
         {% block content %}{% endblock %}
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <p>Moroquito - Panadería y Pastelería</p>
+            </div>
+            <div>
+                <p><strong>Dirección:</strong> Calle Principal #123, Centro, Tu Ciudad</p>
+                <p><strong>Teléfono:</strong> +1 234 567 890</p>
+                <p><strong>Email:</strong> contacto@moroquito.com</p>
+            </div>
+            <div>
+                <p>Síguenos en:</p>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 10px;">
+            <p>&copy; 2024 Moroquito. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
