@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="subtitle is-2">Lista de Usuarios</h2>
+<!--Lista en una tarjeta donde cada usuario tenga sus datos y dos botones para editar y eliminar utilizando grid-->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Accion</th>
+        </tr>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{user.email}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.direction}}</td>
+            <td>{{user.celphone}}</td>
+            <td><a href="{{url_for('user.update_user',id=user.email)}}" class="btn btn-info">Editar</a>
+                <a href="{{ url_for('user.delete_user', id=user.email) }}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </thead>
+</table>
+
+{% endblock %}

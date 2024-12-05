@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-4">
+        
+    <h2 class="title">Registrar Usuario</h2>
+    <form method="post" action="/users/{{user.email}}/update">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="direction" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direction" name="direction" value="{{user.direction}}">
+        </div>
+        <div class="mb-3">
+            <label for="cellphone" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="cellphone" name="cellphone" value="{{user.celphone}}">
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Rol</label>
+            <input type="role" class="form-control" id="role" name="role" value="{{user.role}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+    </form>
+    </div>
+</div>
+{% endblock %}
