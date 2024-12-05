@@ -146,3 +146,7 @@ def profile(id):
     user:Usuarios = Usuarios.get_user_by_email(id)
     return usuario_view.perfil(user)
 
+@user_bp.route('/contact/')
+@login_required
+def contact():
+    return usuario_view.contact()

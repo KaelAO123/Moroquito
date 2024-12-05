@@ -56,3 +56,10 @@ def principal():
         title="Bienvenido",
         current_user=current_user
     )
+
+def contact():
+    return render_template(
+        "contact.html",
+        title="Contáctanos",
+        current_user=current_user
+    )
