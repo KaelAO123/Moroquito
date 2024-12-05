@@ -21,10 +21,8 @@ user_bp = Blueprint("user", __name__)
 @user_bp.route("/")
 def index():
     admin = Usuarios.query.filter_by(email="admin@localHost").first()
-    
-    
     if current_user.is_authenticated:
-        return redirect(url_for("user.profile", id=current_user.email))
+        return usuario_view.principal()
     if not admin:
         # Crea un administrador por defecto
             admin = Usuarios(email="admin@localHost",
@@ -39,6 +37,7 @@ def index():
 
 @user_bp.route("/users")
 @login_required
+@role_required("admin")
 def list_users():
     # Obtenemos todos los usuarios
     users = Usuarios.get_all()
@@ -127,12 +126,7 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
             flash("Inicio de sesión exitoso", "success")
-            if user.has_role("admin"):
-                # Redirigir a su perfil si el usuario es de rol "admin"
-                return redirect(url_for("user.list_users"))
-            else:
-                # Redirigir a la lista de usuarios para otros roles
-                return redirect(url_for("user.profile", id=user.email))
+            return redirect(url_for("user.index"))
         else:
             flash("Nombre de usuario o contraseña incorrectos", "error")
     return usuario_view.login()
@@ -151,6 +145,5 @@ def logout():
 @login_required
 def profile(id):
     user:Usuarios = Usuarios.get_user_by_email(id)
-    if user.has_role("admin"):
-        return redirect(url_for("user.list_users"))
     return usuario_view.perfil(user)
+

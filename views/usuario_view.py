@@ -49,3 +49,10 @@ def perfil(user):
         title="Perfil de usuario", 
         current_user=current_user, user=user
     )
+
+def principal():
+    return render_template(
+        "index.html",
+        title="Bienvenido",
+        current_user=current_user
+    )

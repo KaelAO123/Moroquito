@@ -13,9 +13,8 @@
     <div class="col-md-4 mb-4">
         <div class="card">
             <!-- Imagen del producto -->
-            <img src="{{ url_for('static', filename=product.image) }}" 
-            style="height: 200px; object-fit:cover" 
-            class="card-img-top" alt="{{ product.name }}">
+            <img src="{{ url_for('static', filename=product.image) }}" style="height: 200px; object-fit:cover"
+                class="card-img-top" alt="{{ product.name }}">
 
             <!-- Cuerpo de la tarjeta -->
             <div class="card-body">
@@ -25,30 +24,32 @@
             </div>
             <div>
                 {% if current_user.has_role('admin') %}
-            <a href="{{ url_for('product.update_product', id=product.idProducto) }}" class="btn btn-info">Editar</a>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Eliminar
-            </button>
+                <a href="{{ url_for('product.update_product', id=product.idProducto) }}" class="btn btn-info">Editar</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Eliminar
+                </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto {{product.name}}</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <a href="{{ url_for('product.delete_product', id=product.idProducto) }}" class="btn btn-danger">Confirmar</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto {{product.name}}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <a href="{{ url_for('product.delete_product', id=product.idProducto) }}"
+                                    class="btn btn-danger">Confirmar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            {% endif %}
+
+                {% endif %}
             </div>
             <!-- Pie de la tarjeta -->
             <div class="card-footer d-flex justify-content-between align-items-center">
@@ -56,12 +57,41 @@
                 <small class="text-muted">Disponibles: {{ product.cant_disp }}</small>
                 <div>
                     <!-- Botón de Compra -->
-                    <a href="/comprar/{{ product.idProducto }}" class="btn btn-success btn-sm">Comprar</a>
                     <!-- Botón de Añadir al carrito -->
-                    <a href="/carrito/{{ product.idProducto }}" class="btn btn-outline-primary btn-sm">Añadir al
-                        carrito</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pedidos_modal"
+                        data-bs-whatever="">Añadir a Pedidos</button>
+
+                    <div class="modal fade" id="pedidos_modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Solicitar {{product.name}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                            <input type="text" class="form-control" id="recipient-name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Message:</label>
+                                            <textarea class="form-control" id="message-text"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary">Pedir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
             </div>
 
         </div>
