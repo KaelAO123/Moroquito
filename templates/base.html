@@ -106,7 +106,8 @@
         {% block content %}{% endblock %}
     </div>
 
-    <!-- Footer -->
+    {% if current_user.is_authenticated %}
+
     <footer>
         <div class="container">
             <div>
@@ -128,6 +129,7 @@
             <p>&copy; 2024 Moroquito. Todos los derechos reservados.</p>
         </div>
     </footer>
+{% endif %}
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
