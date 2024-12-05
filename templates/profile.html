@@ -1,18 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="m-4">
-    <h2 class="subtitle is-2">Perfil de Usuario</h2>
-    <div class="card">
-        <div class="card-content">
-            <div class="content p-3">
-                <p><strong>Nombre:</strong> {{ user.first_name }}</p>
-                <p><strong>Apellido:</strong> {{ user.last_name }}</p>
-                <p><strong>Direccion:</strong> {{ user.direction }}</p>
-                <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
-                <p><strong>Rol:</strong> {{ user.role }}</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Perfil de Usuario</h2>
+
+    <!-- Card del perfil -->
+    <div class="card shadow-sm rounded">
+        <div class="card-header text-center bg-primary text-white">
+            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+            <p class="mb-0">Usuario - {{ user.role }}</p>
+        </div>
+        <div class="card-body">
+            <!-- Información del perfil -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <p><strong>Dirección:</strong> {{ user.direction }}</p>
+                </div>
+            </div>
+
+            <!-- Botones de acción (editar, ver pedidos) -->
+            <div class="d-flex justify-content-between">
+                <a href="{{ url_for('user.update_user',id=user.email) }}" class="btn btn-warning">Editar Perfil</a>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

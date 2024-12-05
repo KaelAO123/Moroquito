@@ -1,32 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1 class="title">Iniciar Sesión</h1>
+<div class="container my-5">
+    <h1 class="text-center mb-4">Iniciar Sesión</h1>
     <div class="row justify-content-center">
-        <div class="col-6">
-            <form method="post">
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <div>
-                        <input class="form-control" type="email" name="email" required>
-                    </div>
+        <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input class="form-control" type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div>
+                                <button class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
+                            </div>
+                            <div>
+                                <a href="{{ url_for('user.create_user') }}" class="btn btn-outline-primary w-100">Crear Cuenta</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Contraseña</label>
-                    <div>
-                        <input class="form-control" type="password" name="password" required>
-                    </div>
-                </div>
-                <div class="mb-3 d-flex gap-4">
-                    <div>
-                        <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
-                    </div>
-                    <div>
-                        <a href="{{ url_for('user.create_user') }}" class="btn btn-primary">Crear Cuenta</a>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

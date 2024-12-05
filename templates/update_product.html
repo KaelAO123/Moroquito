@@ -2,50 +2,67 @@
 
 {% block content %}
 <h1 class="text-center mb-4">Actualizar Producto</h1>
-<form  method="POST" enctype="multipart/form-data" action="/products/{{product.idProducto}}/update" class=" p-4">
-    <!-- Campo de nombre del producto -->
-    <div class="mb-3">
-        <label for="name" class="form-label">Nombre del Producto</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{product.name}}" required>
-    </div>
 
-    <!-- Campo de descripción -->
-    <div class="mb-3">
-        <label for="description" class="form-label">Descripción</label>
-        <textarea class="form-control" id="description" name="description" required>{{product.description}}</textarea>
-    </div>
 
-    <!-- Campo de precio -->
-    <div class="mb-3">
-        <label for="price" class="form-label">Precio</label>
-        <input type="number" class="form-control" id="price" name="price" value="{{product.price}}" required>
-    </div>
+<!-- Formulario con diseño más estrecho -->
+<div class="container d-flex justify-content-center">
+    <form method="POST" enctype="multipart/form-data" action="/products/{{product.idProducto}}/update" class="p-4 shadow-sm rounded border bg-light col-md-6">
 
-    <!-- Campo de categoría -->
-    
-    <div class="mb-3">
-        <label for="category" class="form-label">Categoría</label>
-        <input type="text" class="form-control" id="category" name="category" value="{{product.category}}" required>
-    </div>
-
-    <!-- Campo de cantidad disponible -->
-    <div class="mb-3">
-        <label for="cant_disp" class="form-label">Cantidad Disponible</label>
-        <input type="number" class="form-control" id="cant_disp" name="cant_disp" value="{{product.cant_disp}}" required>
-    </div>
-
-    <!-- Campo de imagen -->
-    <div class="mb-3">
-        <label for="image" class="form-label">Imagen del Producto</label>
+        <!-- Campo de nombre del producto -->
         <div class="mb-3">
-            <img src="{{ url_for('static', filename=product.image) }}" 
-        style="width: 700px; object-fit:cover" 
-        class="card-img-top" alt="{{ product.name }}">
+            <label for="name" class="form-label">Nombre del Producto</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{product.name}}" required 
+                   placeholder="Nombre del producto" aria-describedby="nameHelp">
+            <small id="nameHelp" class="form-text text-muted">Por ejemplo: Empanadas, Tortas, etc.</small>
         </div>
 
-        <input type="file" class="form-control" id="image" name="image" required>
-    </div>
+        <!-- Campo de descripción (más largo) -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea class="form-control" id="description" name="description" required>{{product.description}}</textarea>
+            <small class="form-text text-muted">Describe el producto de manera clara y detallada.</small>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Actualizar Producto</button>
-</form>
+        <!-- Campo de precio -->
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{product.price}}" required 
+                   placeholder="Precio en Boliviano" min="0" step="any">
+        </div>
+
+        <!-- Campo de categoría -->
+        <div class="mb-3">
+            <label for="category" class="form-label">Categoría</label>
+            <input type="text" class="form-control" id="category" name="category" value="{{product.category}}" required 
+                   placeholder="Ejemplo: Electrónica, Ropa, etc.">
+        </div>
+
+        <!-- Campo de cantidad disponible -->
+        <div class="mb-3">
+            <label for="cant_disp" class="form-label">Cantidad Disponible</label>
+            <input type="number" class="form-control" id="cant_disp" name="cant_disp" value="{{product.cant_disp}}" required 
+                   min="1" placeholder="Cantidad disponible">
+        </div>
+
+        <!-- Campo de imagen -->
+        <div class="mb-3">
+            <label for="image" class="form-label">Imagen del Producto</label>
+            
+            <!-- Muestra la imagen actual del producto -->
+            <div class="mb-3">
+                <img src="{{ url_for('static', filename=product.image) }}" 
+                     style="width: 100%;" 
+                     class="card-img-top mb-2" alt="{{ product.name }}">
+                <small class="form-text text-muted">Si deseas cambiar la imagen, selecciona un archivo nuevo.</small>
+            </div>
+
+            <!-- Input para cargar una nueva imagen -->
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        </div>
+
+        <!-- Botón para actualizar el producto -->
+        <button type="submit" class="btn btn-success w-100">Actualizar Producto</button>
+    </form>
+</div>
+
 {% endblock %}

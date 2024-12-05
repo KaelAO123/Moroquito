@@ -78,7 +78,6 @@ def create_user():
 # y actualizamos la información del usuario
 @user_bp.route("/users/<string:id>/update", methods=["GET", "POST"])
 @login_required
-@role_required("admin")
 def update_user(id):
     user:Usuarios = Usuarios.get_by_id(id)
     if not user:
