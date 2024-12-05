@@ -32,7 +32,7 @@ def create_product():
             filename = secure_filename(image.filename)
             image.save(os.path.join('static/images', filename))
             image_path = os.path.join("/images/"+filename)
-            print(filename)
+            
         producto:Productos = Productos(name=name, price=price, category=category, cant_disp=cant_disp, description=description,image=image_path)
         producto.save()
         flash("Producto agregado correctamente.", "success")
@@ -65,7 +65,6 @@ def update_product(id):
         cant_disp = request.form["cant_disp"]
         description = request.form["description"]
         image = request.files["image"]
-        
         producto.name = name
         producto.price = price
         producto.category = category
@@ -75,8 +74,7 @@ def update_product(id):
             filename = secure_filename(image.filename)
             image.save(os.path.join('static/images', filename))
             image_path = os.path.join("/images/"+filename)
-            print(filename)
-        producto.image = image_path
+            producto.image = image_path
         
         flash("Producto actualizado exitosamente", "success")
         producto.save()

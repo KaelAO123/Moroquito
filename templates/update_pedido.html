@@ -1,32 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-center mb-4">Actualizar Pedido</h1>
-<form  method="POST" action="/pedidos/{{pedido.idPedido}}/update" class=" p-4">
-    <!-- Campo de nombre del producto -->
-    <div class="mb-3">
-        <label for="direction" class="form-label">Direccion</label>
-        <input type="text" class="form-control" id="direction" name="direction" value="{{pedido.direction}}" required>
-    </div>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Actualizar Pedido</h2>
+    <form method="POST" action="/pedido/{{pedido.idPedido}}/update" class="p-4">
+        <!-- Campo de dirección -->
+        <div class="mb-3">
+            <label for="direction" class="form-label">Dirección de Entrega</label>
+            <input type="text" class="form-control" id="direction" name="direction" value="{{pedido.direction}}" required>
+        </div>
 
-    <!-- Campo de descripción -->
-    <div class="mb-3">
-        <label for="message" class="form-label">Mensaje</label>
-        <textarea class="form-control" id="message" name="message" required>{{pedido.message}}</textarea>
-    </div>
+        <!-- Campo de mensaje -->
+        <div class="mb-3">
+            <label for="message" class="form-label">Mensaje Adicional</label>
+            <textarea class="form-control" id="message" name="message" rows="3">{{pedido.message}}</textarea>
+        </div>
 
-    <!-- Campo de precio -->
-    <div class="mb-3">
-        <label for="cantidadPedida" class="form-label">Cantidad Pedida</label>
-        <input type="number" class="form-control" id="cantidadPedida" name="cantidadPedida" value="{{pedido.cantidadPedida}}" required>
-    </div>
+        <!-- Campo de cantidad -->
+        <div class="mb-3">
+            <label for="cantidadPedida" class="form-label">Cantidad Solicitada</label>
+            <input type="number" class="form-control" id="cantidadPedida" name="cantidadPedida" value="{{pedido.cantidadPedida}}" required>
+        </div>
 
-    <div class="mb-3">
-        <label for="fecha_entrega" class="form-label">Fecha de Entrega</label>
-        <input type="datetime-local" class="form-control" id="fecha_entrega" name="fecha_entrega" value="{{pedido.fecha_entrega}}" required>
-    </div>
-    <!-- Campo de categoría -->
+        <!-- Campo de fecha de entrega -->
+        <div class="mb-3">
+            <label for="fecha_entrega" class="form-label">Fecha de Entrega</label>
+            <input type="datetime-local" class="form-control" id="fecha_entrega" name="fecha_entrega" value="{{pedido.fecha_entrega}}" required>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Actualizar Pedido</button>
-</form>
+        <!-- Estado del pedido (Opcional, si es necesario) -->
+        <div class="mb-3">
+            <label for="estado" class="form-label">Estado del Pedido</label>
+            <select class="form-select" id="estado" name="estado">
+                <option value="Pendiente" {% if pedido.estado == "Pendiente" %}selected{% endif %}>Pendiente</option>
+                <option value="Enviado" {% if pedido.estado == "Enviado" %}selected{% endif %}>Enviado</option>
+                <option value="Entregado" {% if pedido.estado == "Entregado" %}selected{% endif %}>Entregado</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Actualizar Pedido</button>
+    </form>
+</div>
 {% endblock %}
